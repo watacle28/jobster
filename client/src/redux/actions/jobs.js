@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 
-axios.defaults.baseURL = 'http://192.168.1.7:5003/api'
+axios.defaults.baseURL = 'http://localhost:5003/api'
 
 
 export const getAllJobs = () => async dispatch => {

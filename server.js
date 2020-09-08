@@ -1,5 +1,4 @@
 require('dotenv').config();
-require('colors')
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
@@ -41,6 +40,16 @@ app.use('/api/job', checkAuth, canCreate_EDIT_DEL(Job), job)
 app.use('api/auth/admin', adminAuth)
 app.use('/api/admin', checkAuth, isAdmin, admin)
 
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+  }
 // app and db connect
 
 mongoose.connect(process.env.MONGOURI, {
@@ -49,11 +58,9 @@ mongoose.connect(process.env.MONGOURI, {
         useUnifiedTopology: true
     })
     .then(() => {
-        console.log('database connected succesfully'.bgGreen);
-        app.listen(PORT, () => console.log(`server started at ${PORT} use http://localhost:${PORT} to connect`.bgMagenta))
+        console.log('database connected succesfully'
+        );
+        app.listen(PORT, () => console.log(`server started at ${PORT} use http://localhost:${PORT} to connect`))
     })
 
 
-// TODO 
-
-// 7. apply for job
