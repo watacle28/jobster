@@ -53,7 +53,7 @@ if (process.env.NODE_ENV === 'production') {
   }
 // app and db connect
 
-mongoose.connect(process.env.MONGOURI, {
+mongoose.connect(process.env.MONGO_URI, {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true
