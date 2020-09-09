@@ -1,13 +1,15 @@
-import { LOADING, GET_ALL_JOBS, JOB_ADDED, ADD_FILTER, GET_FILTERED_JOBS, REMOVE_FILTER, CLEAR_FILTERS, EDIT_JOB, REMOVE_JOB, GET_SINGLE_JOB, SET_ERRORS } from "../types"
+import { LOADING, GET_ALL_JOBS, JOB_ADDED, ADD_FILTER, GET_FILTERED_JOBS, REMOVE_FILTER, CLEAR_FILTERS, EDIT_JOB, REMOVE_JOB, GET_SINGLE_JOB, SET_ERRORS, APPLYING, APPLY } from "../types"
 
 
 const initialState = {
    jobs: [],
-   currentJob: null,
+   currentJob: {
+       applying: false,
+   },
    allJobs:[],
     errors: null,
     filters:[],
-    loading: true
+    
 }
 
 
@@ -30,6 +32,11 @@ export const jobsReducer = (state = initialState,{type,payload})=>{
             return {
                 ...state, loading: true
             }
+        case APPLYING:
+          
+            return {
+                ...state, currentJob:{_id: payload, applying: true}
+            }    
         case SET_ERRORS:
             return {
                 ...state, errors: payload, loading: false
@@ -51,7 +58,7 @@ export const jobsReducer = (state = initialState,{type,payload})=>{
              return {
                  ...state,payload, errors: null, loading: false
              } 
-
+            
          case ADD_FILTER: 
 
               return {
@@ -72,11 +79,18 @@ export const jobsReducer = (state = initialState,{type,payload})=>{
              }         
          case EDIT_JOB:
              //locate job to edit
-            const jobIndex = state.jobs.findIndex(job => job._id == payload._id);
+            let jobIndex = state.jobs.findIndex(job => job._id == payload._id);
             state.jobs[jobIndex] = payload
              return {
                  ...state, loading: false, errors: null
-             }
+             } 
+             case APPLY:
+                  //locate job to edit
+            let index = state.jobs.findIndex(job => job._id == payload.updatedJob._id);
+            state.jobs[index] = payload.updatedJob
+                return {
+                    ...state,currentJob:{...payload.updatedJob,applying: false}
+                }
          case REMOVE_JOB:
             
              return {

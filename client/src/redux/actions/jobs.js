@@ -70,9 +70,9 @@ export const clearFilters = () => async dispatch => {
 
 export const getSingleJob = (id) => async dispatch => {
     try {
-        dispatch({
-            type: LOADING
-        })
+        // dispatch({
+        //     type: LOADING
+        // })
         const res = await axios.get(`public/jobs/${id}`)
         const payload = res.data.job
         dispatch({

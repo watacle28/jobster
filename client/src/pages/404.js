@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import { StyledBtn } from '../components/CustomButton';
 import { Link } from 'react-router-dom';
@@ -25,6 +26,11 @@ const StyledLost = styled.div`
 export const Lost = () => {
     return (
         <StyledLost>
+            <Helmet>
+          <title>404</title>
+          <meta name="description" content="Error page" />
+         
+        </Helmet>
             <h2>404</h2>
           <p>Yikes, Chum!, Looks like you wondered off a tad</p>
          <Link to='/'> <StyledBtn>Go Back Home</StyledBtn></Link>

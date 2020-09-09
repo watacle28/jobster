@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import styled from 'styled-components';
+import Helmet from 'react-helmet'
 import { Form } from '../components/StyledForm';
 import { StyledBtn } from '../components/CustomButton';
 import { Container_600 } from '../components/Container_600';
@@ -73,6 +74,11 @@ export const EditProfile = ({history}) => {
 
     return (
      <Container_600>
+         <Helmet>
+    <title>{`Edit` | data.fullname}</title>
+          <meta name="description" content={`${data.fullname}'s profile`} />
+         
+        </Helmet>
             <Form noValidate onSubmit={saveChanges}>
         <h2>Update profile</h2>
         <label htmlFor="file">Resume (pdf)</label>

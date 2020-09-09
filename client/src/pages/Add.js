@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
+import Helmet from 'react-helmet'
 import {useDispatch, useSelector}  from 'react-redux'
 import { Form } from '../components/StyledForm';
 import { StyledBtn } from '../components/CustomButton';
@@ -86,7 +87,11 @@ export const Add = ({history,match:{params:{id}}}) => {
        
       <IsCompany>
           <Container_600>
-          
+          <Helmet>
+          <title>{id ? 'Edit Job' : 'Add new job'}</title>
+          <meta name="description" content={id ? 'Edit Job' : 'Add new job'} />
+         
+        </Helmet>
             <StyledAdd loading={loading}>  
             {loading && <div className='loader'><Loader/></div>}
             <Form noValidate onSubmit={id ? saveChanges: publishJob}>

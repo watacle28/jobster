@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import styled from 'styled-components';
 import dayjs from 'dayjs'
@@ -6,7 +6,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import {BsDot} from 'react-icons/bs'
 import {StyledBtn} from './CustomButton'
 import { useDispatch,useSelector } from 'react-redux';
-import { addFilter, deleteJob } from '../redux/actions/jobs';
+import { addFilter, deleteJob, getSingleJob } from '../redux/actions/jobs';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { applyToJob } from '../redux/actions/user';
 
@@ -121,16 +121,30 @@ const StyledJob = styled.div`
 export const Job = ({job}) => {
     const [active, setActive] = useState(false)
     const dispatch = useDispatch();
+    const currentJob = useSelector(state => state.jobs.currentJob)
     const user = useSelector(state => state.auth.authenticated && state.auth.userData)
-    const loading = useSelector(state => state.jobs.loading)
     const filterables = [job.role, job.level, ...job.languages, ...job.tools]
-    const hasAlreadyApplied = job.applications.includes(user.dev?._id)
+    const [Applied, setApplied ] = useState(job.applications.includes(user.dev?._id) )
+   
+     
+ 
+   
+
     dayjs.extend(relativeTime)
     const apply = (jobId)=>{
       setActive(true)
       dispatch(applyToJob(jobId))
+     
     }
-
+    useEffect(() => {
+     if(currentJob._id == job._id && currentJob.applications?.includes(user.dev?._id)){
+          setApplied(true)
+ }
+         //  dispatch(getSingleJob(job._id))
+      
+      
+     
+    }, [currentJob.applications?.length , job.applications?.length])
 
     return (
         <StyledJob>
@@ -155,7 +169,11 @@ export const Job = ({job}) => {
           <span><BsDot/></span> {job.contract} <span><BsDot/></span>
           {job.location}
         </p>
-       {user.dev && user.dev.profileComplete && <StyledBtn disabled={hasAlreadyApplied || active } onClick={()=>apply(job._id)}>{(active && loading ) ?'processing...': hasAlreadyApplied? 'Applied!' : 'Apply' }</StyledBtn>}
+       {user.dev && user.dev.profileComplete && 
+       <StyledBtn
+        disabled={Applied || currentJob._id == job._id && currentJob.applying } 
+        onClick={()=>apply(job._id)}>{(currentJob._id == job._id && currentJob.applying ) ? 'Applying...' : Applied ? 'Applied' : 'Apply' }
+       </StyledBtn>}
         {user.company && user.company.name == job.company && <div className='owner-actions'>
           <Link to={`/edit/${job._id}`}>  <FaEdit /> </Link>
           <FaTrash onClick={()=>dispatch(deleteJob(job._id))}/>

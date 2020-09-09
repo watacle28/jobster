@@ -30,7 +30,8 @@ const StyledFooter = styled.footer`
         display: none;
         @media screen and (max-width: 600px){
         display: inline-block;
-       
+        border-radius: 50%;
+        overflow: hidden;
     }
     }
     

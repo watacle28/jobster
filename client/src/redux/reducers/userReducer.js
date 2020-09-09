@@ -1,27 +1,26 @@
-import { GET_ALL_DEVS, APPLY, LOADING } from "../types";
+import { GET_ALL_DEVS, APPLY, LOADING, APPLYING } from "../types";
 
 const initialState = {
     devs: [],
-  
-    loading: true,
+    applying: false,
     errors: []
 
 }
 
 export const userReducer = (state = initialState, {type,payload})=>{
     switch (type) {
-        case LOADING: 
-            return {
-                ...state, loading: true
-            }
+        // case APPLYING: 
+        //     return {
+        //         ...state, applying: true
+        //     }
        case GET_ALL_DEVS :
            return {
-               ...state, devs: payload,loading: false, errors: null 
+               ...state, devs: payload,applying: false, errors: null 
            }
-        case APPLY:
-            return {
-                ...state, loading: false
-            }
+        // case APPLY:
+        //     return {
+        //         ...state, applying: false
+        //     }
         default:
             return state
     }

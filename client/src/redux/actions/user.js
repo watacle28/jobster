@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ALL_DEVS, SET_ERRORS, APPLY, LOADING } from '../types';
+import { GET_ALL_DEVS, SET_ERRORS, APPLY, LOADING, APPLYING } from '../types';
 import { getAllJobs } from './jobs';
 
 
@@ -18,12 +18,14 @@ export const getAllDevs = () => async dispatch=>{
 
 export const applyToJob = (jobId) => async dispatch => {
     try {
-        dispatch({type: LOADING})
-        const {data:{msg}} = await axios.post(`/dev/apply/${jobId}`)
-        dispatch({type: APPLY, payload: msg })
-        dispatch(getAllJobs())
+        dispatch({type: APPLYING, payload: jobId
+        })
+        const res = await axios.post(`/dev/apply/${jobId}`)
+        console.log(res);
+        dispatch({type: APPLY, payload:res.data })
+        // dispatch(getAllJobs())
 
     } catch (error) {
-        dispatch({type: SET_ERRORS, payload: error.response.data.msg})
+        dispatch({type: SET_ERRORS, payload: error.message})
     }
 }

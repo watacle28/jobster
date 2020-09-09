@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Helmet from 'react-helmet'
 import { DevProfile } from '../components/DevProfile';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -28,6 +29,11 @@ export const Devs = () => {
     }, [devs.length])
     return (
         <StyledDevs>
+            <Helmet>
+          <title>Developers</title>
+          <meta name="description" content='List of all developers' />
+         
+        </Helmet>
          {devs.map(dev =><div className='dev'><DevView dev={dev}/></div>)}
         </StyledDevs>
     )

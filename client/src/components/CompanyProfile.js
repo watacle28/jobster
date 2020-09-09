@@ -76,7 +76,7 @@ export const CompanyProfile = ({open}) => {
           {company.location &&   <span>Based in {company?.location}</span>}
             <p>we are web app start up company</p>
             <div className="coa">
-               <Link to='/edit/co'> <StyledBtn secondary>UPDATE</StyledBtn></Link>
+               <Link to={`/edit/co/${company._id}`}> <StyledBtn secondary>UPDATE</StyledBtn></Link>
                 <StyledBtn onClick={()=>dispatch(logout())}>SIGN OUT</StyledBtn>
             </div>
            {getAllJobs.length > 0 &&  <div className="skills-jobs">

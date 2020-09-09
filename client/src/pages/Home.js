@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Job } from '../components/Job';
-
+import Helmet from 'react-helmet'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllJobs, getFilteredJobs } from '../redux/actions/jobs';
@@ -14,7 +14,11 @@ const StyledHome = styled.main`
     justify-content: center;
     align-items: center;
     margin-bottom: 2rem;
-   
+   .jobs_found{
+       margin: 2rem auto;
+       color: ${props=>props.theme.darkerGray};
+       font-weight: 900;
+   }
 `
 
 export const Home = () => {
@@ -37,7 +41,16 @@ export const Home = () => {
        <Container_1000>
           {loading ? <Loader/> :
             <StyledHome>
+                  <Helmet>
+          <title>Home | Jobs</title>
+          <meta name="description" content='List of jobs' />
+         
+        </Helmet>
             {filters.length > 0 && <FiltersBar filters={filters}/>}
+           {jobs.length > 0 && 
+            <div className="jobs_found">
+              Found {jobs.length} Jobs
+            </div>}
             {jobs.map(job => <Job key={job._id} job={job}/>)}
              </StyledHome>
        

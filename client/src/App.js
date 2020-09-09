@@ -10,7 +10,6 @@ import {Devs} from './pages/Devs'
 
 import {Contact} from './pages/Contact'
 import {Lost} from './pages/404'
-import {Companies} from './pages/Companies'
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Add } from './pages/Add';
@@ -22,10 +21,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadUserData } from './redux/actions/auth';
 import { Loader } from './components/Loader';
 import { AuthRoute, PrivateRoute } from './utils/myRoutes';
-import { DevView } from './components/DevView';
+
 import { DevProfile } from './components/DevProfile';
 import { CompanyProfile } from './components/CompanyProfile';
-import { About } from './pages/About';
+
 
 
 const StyledApp = styled.section`
@@ -42,10 +41,11 @@ const StyledApp = styled.section`
 function App() {
   const dispatch = useDispatch()
   const loading = useSelector(state =>state.auth.loading)
+  // const user = useSelector(state => state.auth.authenticated && state.auth.userData)
   useEffect(() => {
     dispatch(loadUserData())
    
-  }, [dispatch])
+  })
   return ( 
     
     <StyledApp >

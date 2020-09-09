@@ -19,7 +19,7 @@ export const GET_ALL_JOBS = 'GET_ALL_JOBS';
 export const GET_FILTERED_JOBS = 'GET_FILTERED_JOBS'
 export const EDIT_JOB = 'EDIT_JOB';
 export const REMOVE_JOB = 'REMOVE_JOB';
-
+export const APPLYING = 'APPLYING'
 
 //company types
 export const GET_ALL_DEVS = 'GET_ALL_DEVS';

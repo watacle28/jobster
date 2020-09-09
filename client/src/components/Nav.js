@@ -52,9 +52,11 @@ const Links = styled.ul`
     .avatar{
         width:2rem;
         height: 2rem;
+        border-radius:50%;
+        overflow:hidden;
         img{
             width: 100%;
-            border-radius:50%;
+            
         }
     }
 

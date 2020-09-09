@@ -165,9 +165,10 @@ router.post('/apply/:jobId', async (req, res) => {
                job,dev,company
             });
             job.applications.push(dev._id);
-            await job.save()
+            const updatedJob = await job.save()
             return res.json({
-                msg: 'application successfull'
+                msg: 'application successfull',
+                updatedJob
             })
         })
     }
