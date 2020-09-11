@@ -131,7 +131,7 @@ export const ImageUpload = ({avatar, user}) => {
     const [imageURI, setImageURI] = useState(avatar);
     const [uploading, setUploading] = useState(false);
 
-    const UPLOAD_API_URL = `http://localhost:5003/api/${user}/upload`;
+    const UPLOAD_API_URL = `/api/${user}/upload`;
     const token = localStorage.getItem('token');
    
 

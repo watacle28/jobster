@@ -3,7 +3,7 @@ import { GET_ALL_DEVS, SET_ERRORS, APPLY, LOADING, APPLYING } from '../types';
 import { getAllJobs } from './jobs';
 
 
-axios.defaults.baseURL = 'http://localhost:5003/api'
+axios.defaults.baseURL = '/api'
 
 export const getAllDevs = () => async dispatch=>{
     try {

@@ -8,7 +8,7 @@ import {setAuthToken} from '../../utils/setAtuthToken'
             "Content-type": "application/json"
         }
     }
-axios.defaults.baseURL = 'http://localhost:5003/api'
+axios.defaults.baseURL = '/api'
 
     
 
